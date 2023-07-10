@@ -1,0 +1,16 @@
+---
+name: "Local Files Preferred"
+guid: "2ad61cac-3e9d-48ba-bf00-e0d99dfc1165"
+version: "1.0.0.0"
+targetAbi: "10.8.0.0"
+framework: "net6.0"
+overview: "Short description about your plugin"
+description: >
+  This is a longer description that can span more than one
+  line and include details about your plugin.
+category: "General"
+owner: "jellyfin"
+artifacts:
+- "q12.JellyfinPlugin.LocalFilesPreferred.dll"
+changelog: >
+  changelog
