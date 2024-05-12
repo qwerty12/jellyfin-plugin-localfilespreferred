@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-using MediaBrowser.Controller.Plugins;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using MediaBrowser.Controller.Session;
+using Microsoft.Extensions.Hosting;
 
 namespace q12.JellyfinPlugin.LocalFilesPreferred;
 
-public sealed class SessionWatcher : IServerEntryPoint
+public sealed class SessionWatcher : IHostedService
 {
     private readonly ISessionManager _sessionManager;
 
@@ -13,7 +14,7 @@ public sealed class SessionWatcher : IServerEntryPoint
         _sessionManager = sessionManager;
     }
 
-    public Task RunAsync()
+    public Task StartAsync(CancellationToken cancellationToken)
     {
         _sessionManager.SessionStarted += SessionManagerOnSessionStarted;
         _sessionManager.SessionEnded += SessionManagerOnSessionEnded;
@@ -21,10 +22,12 @@ public sealed class SessionWatcher : IServerEntryPoint
         return Task.CompletedTask;
     }
 
-    public void Dispose()
+    public Task StopAsync(CancellationToken cancellationToken)
     {
         _sessionManager.SessionEnded -= SessionManagerOnSessionEnded;
         _sessionManager.SessionStarted -= SessionManagerOnSessionStarted;
+
+        return Task.CompletedTask;
     }
 
     private static void SessionManagerOnSessionStarted(object? sender, SessionEventArgs e)
