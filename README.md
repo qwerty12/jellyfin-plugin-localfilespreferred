@@ -10,6 +10,9 @@ This plugin was made for personal use with consideration shown only to my partic
 
 This uses [Harmony](https://github.com/pardeike/Harmony) to patch the internal method that returns paths at runtime; this is the quickest way and requires no constant changes to your libraries' configuration.
 
+With 10.10, this plugin now patches the relevant methods in the Jellyfin core to allow `NetworkPath`s to be sent, allowing Native Mode in *Jellyfin for Kodi* to work again (for as long as said plugin retains support for NM on the client side).
+However, there's one change re. the implementation: this plugin pools all the libraries paths' together. This isn't an issue in reality; I can't see someone having the same folder in multiple libraries, but with different `NetworkPath`s.
+
 ## Setting a shared network folder in Jellyfin 10.9
 
 ... as the ability to let you set a shared network folder from the web interface has been removed.
